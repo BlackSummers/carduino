@@ -3,7 +3,7 @@
 
  ##PIN->PBx;PCx;PDx;ADCx/(Pin-Bezeichnung/)Pin-Nr/Digital-Pin;Analog-Pin
  ##PIN##          ##Beschreibung##        ##Code-Status##
- PB0/12/8         Standby (TJA1042T)      
+ PB0/12/8         Standby (TJA1042T)      ready for testing
  PB1/13/9         INT (MCP2515)           ready for testing
  PB2/14/10        CS (MCP2515)            ready for testing
  PB3/(MOSI/)15/11 MOSI (MCP2515)          AUTO
@@ -23,7 +23,7 @@
  PD2/32/2         Wake Input              ready for testing (no change)
  PD3/1/3          Power PD                ready for testing (no change)
  PD4/2/4          Tablet PD               ready for testing (no change)
- PD5/9/5          AMP Remote              
+ PD5/9/5          AMP Remote              ready for testing
  PD6/10/6         unbelegt                fertig
  PD7/11/7         unbelegt                fertig
  ADC6/19/A6       SWC1RX (Lenkrad)        ready for testing
