@@ -48,7 +48,6 @@ public:
         PORTB = this->portb;
         DDRC = this->ddrc;
         PORTC = this->portc;
-        DDRD = this->ddrd;
         PORTD = this->portd;
         ADCSRA = this->adcsra;
     }
@@ -60,7 +59,9 @@ class PowerManager {
 private:
     Stream * serial;
     uint8_t chargerPin;
-    uint8_t peripheralPin;
+    uint8_t tabletPin;
+    uint8_t ampPin;
+    uint8_t tjaPin;
     bool confirmInterrupt(uint8_t interruptPin, uint8_t desiredPinState,
             uint32_t duration) {
         uint32_t sampleDelay = duration / 10;
@@ -93,9 +94,18 @@ private:
         // get interrupt handle
         uint8_t interrupt = digitalPinToInterrupt(INTERRUPT_PIN);
 
-        // disable built in power modules
-        this->togglePeripherals(false);
+        // schalte Tablet ab
+        // this->togglePeripherals(false);
+        this->toggleTablet(false);
 
+        // schalte AMP ab
+        this->toggleAMP(false);
+
+        // schalte TJA1042T ab
+        this->toggleTJA(false);
+
+
+/*  ÜBERARBEITEN da die PD via USB kommt
         // If specified by user charge tablet for a while
         if (chargeDuration > 0) {
             // Make sure charger is on!
@@ -115,7 +125,7 @@ private:
                 }
             }
         }
-
+*/
         // disable charger
         this->toggleCharger(false);
 
@@ -173,23 +183,35 @@ private:
         }
     }
 public:
-    PowerManager(Stream * serial, uint8_t chargerPin, uint8_t peripheralPin) {
+    PowerManager(Stream * serial, uint8_t chargerPin, uint8_t tabletPin, uint8_t ampPin, uint8_t tjaPin) {
         this->serial = serial;
         this->chargerPin = chargerPin;
-        this->peripheralPin = peripheralPin;
+        this->tabletPin = tabletPin;
+        this->ampPin = ampPin;
+        this->tjaPin = tjaPin;
     }
     void setup() {
         pinMode(this->chargerPin, OUTPUT);
-        pinMode(this->peripheralPin, OUTPUT);
+        pinMode(this->tabletPin, OUTPUT);
+        pinMode(this->ampPin, OUTPUT);
+        pinMode(this->tjaPin, OUTPUT);
 
         this->toggleCharger(true);
-        this->togglePeripherals(true);
+        this->toggleTablet(true);
+        this->toggleAMP(true);
+        this->toggleTJA(true);
     }
     void toggleCharger(bool state) {
         digitalWrite(this->chargerPin, state);
     }
-    void togglePeripherals(bool state) {
-        digitalWrite(this->peripheralPin, state);
+    void toggleTablet(bool state) {
+        digitalWrite(this->tabletPin, state);
+    }
+    void toggleAMP(bool state) {
+        digitalWrite(this->ampPin, state);
+    }
+    void toggleTJA(bool state) {
+        digitalWrite(this->tjaPin, state);
     }
     template<uint8_t INTERRUPT_PIN, uint8_t INTERRUPT_TYPE,
             uint32_t INTERRUPT_DURATION, uint32_t CHARGE_DURATION>
