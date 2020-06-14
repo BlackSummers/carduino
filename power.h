@@ -35,8 +35,9 @@ public:
         this->adcsra = ADCSRA;
     }
     void turnOff() {
-        DDRB = B00000000;
-        PORTB = B00000000;
+		// Port PB0 (TJA) auf HIGH und OUTPUT
+		DDRB = B00000001;
+        PORTB = B00000001;
         DDRC = B00000000;
         PORTC = B00000000;
         DDRD = B00000000;
@@ -102,7 +103,7 @@ private:
         this->toggleAMP(false);
 
         // schalte TJA1042T ab
-        this->toggleTJA(false);
+        this->toggleTJA(true);
 
 
 /*  ÜBERARBEITEN da die PD via USB kommt
@@ -199,7 +200,7 @@ public:
         this->toggleCharger(true);
         this->toggleTablet(true);
         this->toggleAMP(true);
-        this->toggleTJA(true);
+        this->toggleTJA(false);
     }
     void toggleCharger(bool state) {
         digitalWrite(this->chargerPin, state);

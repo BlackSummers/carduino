@@ -92,9 +92,9 @@ void onCarduinoSerialTimeout() {
     powerManager.toggleTablet(false);
     powerManager.toggleCharger(false);
     powerManager.toggleAMP(false);
-    powerManager.toggleTJA(false);
-    delay(1000);
     powerManager.toggleTJA(true);
+    delay(1000);
+    powerManager.toggleTJA(false);
     powerManager.toggleAMP(true);
     powerManager.toggleCharger(true);
     powerManager.toggleTablet(true);
