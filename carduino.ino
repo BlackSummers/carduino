@@ -128,7 +128,6 @@ bool onSleep() {
     if (shouldSleep) {
         carduino.end();
     }
-
     return shouldSleep;
 }
 
