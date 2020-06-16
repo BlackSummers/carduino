@@ -150,7 +150,7 @@ private:
     CarData * carData[50];
     uint8_t carDataCount = 0;
 
-    uint8_t canInterruptPin = 2;
+    uint8_t canInterruptPin = 9;
     boolean isInitialized = false;
     boolean isSniffing = false;
 
