@@ -41,6 +41,14 @@ public:
         return this->isInitialized;
     }
 
+    void sleep() {
+        this->can->setMode(MCP_SLEEP);
+      }
+      
+    void wakeup() {
+        this->can->setMode(MCP_NORMAL);
+      }
+
     void startSniffer() {
         this->isSniffing = true;
     }

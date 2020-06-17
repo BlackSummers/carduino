@@ -89,8 +89,8 @@ public:
         this->powerManager = powerManager;
     }
     void begin() {
-		// MCP in NORMAL schicken
-		can.setMode(MCP_NORMAL);
+		    // MCP in NORMAL schicken
+		    this->can->wakeup();
         this->serial->begin(115200);
         delay(1000);
     }
@@ -102,8 +102,8 @@ public:
         this->serial->flush();
         this->serial->end();
         this->isConnectedFlag = false;
-		// MCP in SLEEP schicken
-		can.setMode(MCP_SLEEP);
+		    // MCP in SLEEP schicken
+		    this->can->sleep();
     }
     virtual void onSerialPacket(uint8_t type, uint8_t id,
             BinaryBuffer *payloadBuffer) {
