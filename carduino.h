@@ -96,14 +96,21 @@ public:
     }
     void end() {
         this->triggerEvent(2);
+        // MCP in SLEEP schicken
+        this->can->sleep();
         this->serial->flush();
         delay(500);
         shutdown.serialize(this->serial);
         this->serial->flush();
         this->serial->end();
         this->isConnectedFlag = false;
-		    // MCP in SLEEP schicken
-		    this->can->sleep();
+
+        // ATMega in den Sleep schicken
+        sleep_enable();
+        sleep_bod_disable();
+        sei();
+        sleep_cpu();
+        sleep_disable();
     }
     virtual void onSerialPacket(uint8_t type, uint8_t id,
             BinaryBuffer *payloadBuffer) {

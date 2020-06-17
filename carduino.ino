@@ -68,7 +68,6 @@ bool isAccessoryOn = false;
 
 void setup() {
     carduino.begin();
-
     powerManager.setup();
     carduino.addCan(&can);
     carduino.addPowerManager(&powerManager);
